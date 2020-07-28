@@ -1,0 +1,32 @@
+{
+    "name": "fhayashida/cardapio-menu",
+    "description": "Sistema de Menu",
+    "license": "MIT",
+    "authors": [
+    {
+        "name": "Flávio Hayashida",
+        "email": "fmmh18@gmail.com"
+    }
+],
+    "require": {
+        "phpmailer/phpmailer": "^6.1",
+        "vlucas/phpdotenv": "^4.1",
+        "illuminate/database": "^7.14",
+        "illuminate/events": "^7.14",
+        "coffeecode/router": "^1.0",
+        "league/plates": "^3.3",
+        "illuminate/pagination": "^7.17",
+        "illuminate/http": "^7.20",
+        "illuminate/validation": "^7.20",
+        "illuminate/support": "^7.20",
+        "league/oauth2-google": "^3.0",
+        "illuminate/filesystem": "^7.21",
+        "illuminate/session": "^7.21"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\" : "app/",
+            "assets\\" : "assets/"
+        }
+    }
+}

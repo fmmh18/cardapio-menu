@@ -16,17 +16,23 @@
         "coffeecode/router": "^1.0",
         "league/plates": "^3.3",
         "illuminate/pagination": "^7.17",
-        "illuminate/http": "^7.20",
+        "illuminate/http": "^7.22",
         "illuminate/validation": "^7.20",
-        "illuminate/support": "^7.20",
+        "illuminate/support": "^7.22",
         "league/oauth2-google": "^3.0",
         "illuminate/filesystem": "^7.21",
-        "illuminate/session": "^7.21"
+        "illuminate/session": "^7.22",
+        "coffeecode/optimizer": "^2.0",
+        "illuminate/contracts": "^7.22",
+        "illuminate/console": "^7.22",
+        "dragonmantank/cron-expression": "^3.0",
+        "illuminate/bus": "^7.22",
+        "illuminate/queue": "^7.22"
     },
     "autoload": {
         "psr-4": {
             "App\\" : "app/",
-            "assets\\" : "assets/"
+            "Assets\\" : "assets/"
         }
     }
 }

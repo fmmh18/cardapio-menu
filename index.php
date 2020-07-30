@@ -17,6 +17,7 @@ include __DIR__ . '/src/depedencie.php';
 
 $router = new Router(getenv('APP_HOST'));
 
+
 //Rota do Site
 $router->namespace("app\controller");
 $router->group(null);
@@ -24,7 +25,8 @@ $router->get("/","IndexController:index");
 $router->get("/restaurante","IndexController:restaurant"); 
 $router->get("/cardapio/{id}","IndexController:menu"); 
 $router->get("/orcamento","IndexController:budget"); 
-$router->post("/pedido","IndexController:request"); 
+$router->post("/pedido","IndexController:shore");  
+$router->post("/login","userController:userLogin"); 
 
 //Rota Admin
 $router->namespace("app\controller");
@@ -68,36 +70,6 @@ $router->post("/vaga/adicionar", "Vacancy:vacancyStore");
 $router->post("/vaga/editar", "Vacancy:vacancyUpdate");
 $router->get("/vaga/editar/{id}", "Vacancy:vacancyDetail");
 $router->get("/vaga/editar/{id}/{message}", "Vacancy:vacancyDetail");
-//CRUD Contato
-$router->get("/contato/listar/{page}", "Contact:contactList");
-$router->get("/contato/listar/{page}/{message}", "Contact:contactList");
-$router->get("/contato/info/{id}", "Contact:contactInfoDetail");
-$router->get("/contato/adicionar", "Contact:contactCreate");
-$router->post("/contato/adicionar", "Contact:contactStore");
-$router->post("/contato/editar", "Contact:contactUpdate");
-$router->get("/contato/editar/{id}", "Contact:contactDetail");
-$router->get("/contato/editar/{id}/{message}", "Contact:contactDetail");
-$router->get("/contato/deletar/{id}", "Contact:contactDelete");
-//CRUD Orçamento
-$router->get("/orcamento/listar/{page}", "Budget:budgetList");
-$router->get("/orcamento/listar/{page}/{message}", "Budget:budgetList");
-$router->get("/orcamento/info/{id}", "Budget:budgetInfoDetail");
-$router->get("/orcamento/adicionar", "Budget:budgetCreate");
-$router->post("/orcamento/adicionar", "Budget:budgetStore");
-$router->post("/orcamento/editar", "Budget:budgetUpdate");
-$router->get("/orcamento/editar/{id}", "Budget:budgetDetail");
-$router->get("/orcamento/editar/{id}/{message}", "Budget:budgetDetail");
-$router->get("/orcamento/deletar/{id}", "Budget:budgetDelete");
-//CRUD Serviço
-$router->get("/servico/listar/{page}", "Service:serviceList");
-$router->get("/servico/listar/{page}/{message}", "Service:serviceList");
-$router->get("/servico/info/{id}", "Service:serviceInfoDetail");
-$router->get("/servico/adicionar", "Service:serviceCreate");
-$router->post("/servico/adicionar", "Service:serviceStore");
-$router->post("/servico/editar", "Service:serviceUpdate");
-$router->get("/servico/editar/{id}", "Service:serviceDetail");
-$router->get("/servico/editar/{id}/{message}", "Service:serviceDetail");
-$router->get("/servico/deletar/{id}", "Service:serviceDelete");
 
 $router->get("/sair", "User:userLogout");
 

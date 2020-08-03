@@ -5,6 +5,7 @@
     use Illuminate\Http\Request;
     use App\Model\pageModel;
     use App\Model\restaurantModel;
+    use App\Model\ClientModel;
     use App\Model\menuModel;
     use App\Model\categoryModel;
     use App\Model\restaurantcategoryModel;
@@ -39,7 +40,6 @@ class indexController
     
     public function menu($request)
     {
-            $pagina = 'menu';
             $id = $request['id'];
 
             $menus = new menuModel;
@@ -51,11 +51,42 @@ class indexController
             $restaurant = $restaurants->restaurantInfo($id);
             
             $title = "XôMenu - Seu webcardárpio - Cardápio do ".$restaurant['restaurant_name'];
-            require __DIR__."/../view/page.php";
+            require __DIR__."/../view/menu.php";
     }
 
-    public function shore($request)
+    public function order($data)
     {
-        print_r($request);
+        session_start(); 
+        $_SESSION['order'] = $data;
+        if(empty($_SESSION['order']))
+        {
+
+            $resquests = $_SESSION['order']; 
+        }
+        else
+        {
+            $resquests = $data; 
+        }
+
+        if(empty($_SESSION['uID']))
+        {
+            
+            header("location: ".getenv('APP_HOST')."/login");
+            exit;
+        }
+        else
+        {
+        $menus = new menuModel;
+        $restaurants = new restaurantModel;
+        $clients = new clientModel;
+    
+        $datas = $menus->menuList($_SESSION['order']['restaurant_id']);     
+        $restaurant = $restaurants->restaurantInfo($_SESSION['order']['restaurant_id']);  
+        $client = $clients->clientDetail($_SESSION['uID']);
+    
+        
+        $title = "XôMenu - Seu webcardárpio";
+        require __DIR__."/../view/order.php";
+        }
     }
 }

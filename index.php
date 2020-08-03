@@ -25,8 +25,12 @@ $router->get("/","IndexController:index");
 $router->get("/restaurante","IndexController:restaurant"); 
 $router->get("/cardapio/{id}","IndexController:menu"); 
 $router->get("/orcamento","IndexController:budget"); 
-$router->post("/pedido","IndexController:shore");  
-$router->post("/login","userController:userLogin"); 
+$router->post("/pedido","IndexController:order");  
+$router->get("/pedido","IndexController:order");  
+$router->get("/login","UserController:userPageLogin"); 
+$router->post("/login","UserController:userLogin"); 
+$router->post("/registrar","UserController:userShore"); 
+$router->get("/sair","UserController:userLogout");
 
 //Rota Admin
 $router->namespace("app\controller");

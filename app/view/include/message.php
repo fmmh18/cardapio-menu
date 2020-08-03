@@ -1,6 +1,7 @@
 <?php if(!empty($status['message'])){ ?>
  <?php if($status['message'] == 'sucesso'){ ?>
  <script>
+
     $(document).ready(function(){  
     toastr.success(<?php echo '"'.$message.'"'; ?>);
 

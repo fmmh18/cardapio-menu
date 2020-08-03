@@ -4,9 +4,17 @@
 
     use Illuminate\Http\Request;
     use App\Model\userModel;
+    use App\Model\clientModel;
 
 class userController
 {
+    public function userPageLogin()
+    {
+        session_start();
+        $title = "XôMenu - Seu webcardárpio - Login";
+        require __DIR__."/../view/login.php";
+    }
+
     public function userLogin($request)
     {
         $users = new userModel;
@@ -23,7 +31,14 @@ class userController
                 session_start();
                 $_SESSION['uID']   = $return['user_id'];
                 $_SESSION['uName'] = $return['user_name'];
-                header("location: ".getenv('APP_HOST')."/");
+                if(!empty($_SESSION['order']))
+                {
+                    header("location: ".getenv('APP_HOST')."/pedido");
+                }
+                else
+                {
+                    header("location: ".getenv('APP_HOST')."/");
+                }
             }
             else
             {
@@ -32,6 +47,23 @@ class userController
             }
 
         }
+        
+    }
+
+    public function userShore($request)
+    {
+        $clients = new clientModel;
+        $users   = new userModel;
+    }
+
+    public function userLogout()
+    {
+        session_start();
+        session_destroy();
+        unset($_SESSION['uID']);
+        unset($_SESSION['uName']);
+        unset($_SESSION['order']);
+        header("location: ".getenv('APP_HOST')."/");
         
     }
 }

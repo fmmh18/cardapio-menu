@@ -28,4 +28,17 @@ class userModel extends Model
                         ->where('user_password','=',$password)
                         ->where('user_status','=',1)->first();
     }
+
+    public function userInsert($data)
+    {
+        $user = new userModel;
+        $user->user_name        = $data['name'];
+        $user->user_mail        = $data['mail'];
+        $user->user_password    = md5($data['password']);
+        $user->level            = 3;
+        $user->created_at       = date('Y-m-d H:i:s');
+        $user->save();
+        
+        return $user->id();
+    }
 }

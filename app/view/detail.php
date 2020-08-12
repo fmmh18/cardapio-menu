@@ -28,26 +28,24 @@
 <?php endif; ?>
 </p>
 </div>
-</div> 
+</div>
+<form action="/pedido"> 
 <input type="hidden" name="restaurant_id" value="<?php echo $id; ?>">
-<?php foreach($rows as $row): ?>
-<div class="col-12"><h3><?php echo $row['category_name'];?></h3></div>
-<?php foreach($datas as $data): ?>
-<?php if($row['category_name'] == $data['category_name']): ?>
-    <a href="/prato/<?php echo $restaurant['restaurant_slug'].'/'.$data['product_slug']?>" class="text-decoration-none">
+<input type="hidden" name="restaurant_slug" value="<?php echo $restaurant['restaurant_slug']; ?>">
     <div class="col-md-12 shadow-sm p-3 mb-4 bg-white rounded">
         <div class="row">
             <div class="col-md-2"><img src="<?php echo getenv('APP_UPLOADIMAGE').$data['product_image']?>" class="img-fluid"></div>
-            <div class="col-md-10"><b class="h5"><?php echo $data['product_name']; ?></b><br/>
+            <div class="col-md-8"><b class="h5"><?php echo $data['product_name']; ?></b><br/>
                                <?php echo $data['product_description']; ?><br/>
                                <b><?php echo 'R$ '.number_format($data['product_price'],2,',','.'); ?></b>
-            </div> 
+            </div>
+            <div class="col-md-2"><input type="number" name="order_quantity" min="0" value="1"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 p-5"><button type="submit" class="btn btn-danger btn-lg btn-block"><i class="fas fa-luggage-cart"></i> Colocar Carrinho</button></div>
         </div>
     </div>
-<?php endif;?>
-</a>
-<?php endforeach; ?>
-<?php endforeach; ?> 
+</form>
 </div>
 </div>
 </div>

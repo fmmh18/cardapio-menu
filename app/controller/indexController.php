@@ -8,13 +8,15 @@
     use App\Model\ClientModel;
     use App\Model\menuModel;
     use App\Model\categoryModel;
+    use App\Model\productModel;
+    use App\Model\RequestModel;
     use App\Model\restaurantcategoryModel;
 
 class indexController
 {
-    public function index($request)
+    public function index($data)
     {
-        
+        session_start();  
         $pages = new pageModel;
 
         $page = $pages->pageDetailTag('home');
@@ -24,8 +26,9 @@ class indexController
              require __DIR__."/../view/page.php";
     }
 
-    public function restaurant($request)
+    public function restaurant($data)
     {
+        session_start(); 
         $pagina = 'restaurant';
         $pages = new pageModel;
         $restaurants = new restaurantModel;
@@ -40,18 +43,34 @@ class indexController
     
     public function menu($request)
     {
-            $id = $request['id'];
+            session_start(); 
+            $slug = $request['slug'];
 
             $menus = new menuModel;
             $restaurants = new restaurantModel;
             $restaurantsCategorys = new restaurantcategoryModel;
 
-            $rows  = $restaurantsCategorys->restaurantCategoryList($id);
-            $datas = $menus->menuList($id);
-            $restaurant = $restaurants->restaurantInfo($id);
+            $restaurant = $restaurants->restaurantInfo($slug);
+            $rows  = $restaurantsCategorys->restaurantCategoryList($restaurant['restaurant_id']);
+            $datas = $menus->menuList($restaurant['restaurant_id']);
             
             $title = "XôMenu - Seu webcardárpio - Cardápio do ".$restaurant['restaurant_name'];
             require __DIR__."/../view/menu.php";
+    }
+
+    public function detail($request)
+    {
+        session_start(); 
+        $restaurant_id  = $request['slug'];
+        $product_id     = $request['tag'];
+        $restaurants = new restaurantModel;
+        $products = new productModel;
+
+        $data = $products->productDetailSlug($product_id);
+        $restaurant = $restaurants->restaurantInfo($restaurant_id);   
+        
+        $title = "XôMenu - Seu webcardárpio";
+        require __DIR__."/../view/detail.php";
     }
 
     public function order($data)
@@ -88,5 +107,25 @@ class indexController
         $title = "XôMenu - Seu webcardárpio";
         require __DIR__."/../view/order.php";
         }
+    }
+    
+    public function shore($request)
+    {
+        session_start(); 
+        print_r($request);
+        $requests = new requestModel;
+ 
+       
+        $restaurant_id  = $_SESSION['order']['restaurant_id'];
+        $user_id        = $_SESSION['uID'];
+        $change_payment = str_replace(',','.',$request['change_payment']);
+        $total = str_replace(',','.',$request['total']);
+        $data = ['request_payment' => $request['payment'], 'request_total' => $total,'request_change_payment' => $change_payment];
+
+        $order = $requests->requestInsert($data);
+        echo $order;
+       // print_r($data);
+        unset($_SESSION['order']['restaurant_id']); 
+        print_r($_SESSION['order']);
     }
 }

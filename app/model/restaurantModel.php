@@ -15,12 +15,12 @@ class restaurantModel extends Model
 
     public function restaurantList()
     {
-        return restaurantModel::where('restaurant_status','=',1)->get();
+        return restaurantModel::where('restaurant_status',1)->get();
     }
 
-    public function restaurantInfo($id)
+    public function restaurantInfo($slug)
     {
-        return restaurantModel::where('restaurant_status','=',1)->where('restaurant_id','=',$id)->first();
+        return restaurantModel::where('restaurant_status',1)->where('restaurant_slug',$slug)->first();
     }
 
 }

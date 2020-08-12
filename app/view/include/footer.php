@@ -9,8 +9,35 @@
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
     <script> 
+        $("#change_payment").hide();
+        $('#change_money').mask('000.000.000.000.000,00', {reverse: true});
         $("input[type='number']").inputSpinner(); 
+        $("#wrapper").addClass("toggled");
         $('#payment').selectpicker();
+        $('#delivery').val(1);
+        function validaEntrega() {
+        if($('#delivery').is(":checked") == true)
+        {
+            $('#delivery').val(1);
+            $('#address').fadeIn(1500);
+        }else{
+            
+            $('#delivery').val(0);
+            $('#address').fadeOut(1500); 
+        }
+        }
+        $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+    $('#payment').change(function (){
+     if($(this).val() == 1)
+     {
+        $('#change_payment').fadeIn(1500);
+     }else{
+        $('#change_payment').fadeOut(1500);
+     }
+     });
     </script>
  </body>
 </html>

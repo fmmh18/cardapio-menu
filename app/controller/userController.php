@@ -31,9 +31,10 @@ class userController
                 session_start();
                 $_SESSION['uID']   = $return['user_id'];
                 $_SESSION['uName'] = $return['user_name'];
+                $_SESSION['uLevel'] = $return['user_level'];
                 if(!empty($_SESSION['order']))
                 {
-                    header("location: ".getenv('APP_HOST')."/pedido");
+                    header("location: ".getenv('APP_HOST')."/");
                 }
                 else
                 {
@@ -60,9 +61,7 @@ class userController
     {
         session_start();
         session_destroy();
-        unset($_SESSION['uID']);
-        unset($_SESSION['uName']);
-        unset($_SESSION['order']);
+        unset($_SESSION);
         header("location: ".getenv('APP_HOST')."/");
         
     }

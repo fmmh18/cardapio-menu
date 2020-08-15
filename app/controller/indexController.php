@@ -10,6 +10,7 @@
     use App\Model\categoryModel;
     use App\Model\productModel;
     use App\Model\RequestModel;
+    use App\Model\requestClientProduct;
     use App\Model\restaurantcategoryModel;
 
 class indexController
@@ -22,8 +23,7 @@ class indexController
         $page = $pages->pageDetailTag('home');
 
         $title = "XôMenu - Seu webcardárpio";
-
-             require __DIR__."/../view/page.php";
+        require __DIR__."/../view/page.php";
     }
 
     public function restaurant($data)
@@ -45,6 +45,21 @@ class indexController
     {
             session_start(); 
             $slug = $request['slug'];
+
+            if(!empty($request['message']))
+            {
+                if($request['message'] == 'sucesso')
+                {
+                    $status['message'] = 'sucesso' ;
+                    $message = "Pedido enviado.";
+                }
+                else if($request['message'] == 'erro')
+                {
+                    $status['message'] = 'erro' ;
+                    $message = "Opss! aconteceu algo que não previamos.";
+                }
+            }
+            
 
             $menus = new menuModel;
             $restaurants = new restaurantModel;
@@ -73,23 +88,23 @@ class indexController
         require __DIR__."/../view/detail.php";
     }
 
-    public function order($data)
+    public function order($request)
     {
         session_start(); 
-        $_SESSION['order'] = $data;
-        if(empty($_SESSION['order']))
+        if(!isset($_SESSION['order']))
         {
-
-            $resquests = $_SESSION['order']; 
-        }
-        else
+            $_SESSION['order'] = array();
+        } 
+        if(!empty($request))
         {
-            $resquests = $data; 
+            $_SESSION['order'][] = ['product_id'=>$request['product_id'],'product_price'=>$request['product_price'],'product_quantity'=>$request['product_quantity']];
         }
-
+        
         if(empty($_SESSION['uID']))
         {
-            
+            $_SESSION['restaurant_slug'] = $request['restaurant_slug'];
+            $_SESSION['restaurant_id'] = $request['restaurant_id'];
+           
             header("location: ".getenv('APP_HOST')."/login");
             exit;
         }
@@ -97,13 +112,13 @@ class indexController
         {
         $menus = new menuModel;
         $restaurants = new restaurantModel;
-        $clients = new clientModel;
-    
-        $datas = $menus->menuList($_SESSION['order']['restaurant_id']);     
-        $restaurant = $restaurants->restaurantInfo($_SESSION['order']['restaurant_id']);  
+        $clients = new clientModel; 
+        $resquests = $_SESSION['order']; 
+      
+        $restaurant = $restaurants->restaurantInfo($_SESSION['restaurant_slug']);  
+        $datas = $menus->menuList($restaurant['restaurant_id']);  
         $client = $clients->clientDetail($_SESSION['uID']);
-    
-        
+      
         $title = "XôMenu - Seu webcardárpio";
         require __DIR__."/../view/order.php";
         }
@@ -112,20 +127,38 @@ class indexController
     public function shore($request)
     {
         session_start(); 
-        print_r($request);
-        $requests = new requestModel;
- 
-       
-        $restaurant_id  = $_SESSION['order']['restaurant_id'];
+
+        $requests       = new requestModel;
+        $clientProduct  = new requestClientProduct; 
+
         $user_id        = $_SESSION['uID'];
         $change_payment = str_replace(',','.',$request['change_payment']);
-        $total = str_replace(',','.',$request['total']);
-        $data = ['request_payment' => $request['payment'], 'request_total' => $total,'request_change_payment' => $change_payment];
+        $total          = str_replace(',','.',$request['total']);
+        $data           = ['request_payment' => $request['payment'], 'request_total' => $total,'request_change_payment' => $change_payment, 'request_delivery' => $request['delivery']];
+      
+        $result         = $requests->requestInsert($data);
+    
+        $count = count($_SESSION['order']); 
+        for($i = 0;$i <= $count;$i++)
+        {
+            $row = ['request_id' => $result,'product_id'=>$_SESSION['order'][$i]['product_id'],'client_id'=>$_SESSION['uID'],'quantity'=>$_SESSION['order'][$i]['product_quantity'],'product_price'=>str_replace(',','.',$_SESSION['order'][$i]['product_price'])];
+             $clientProduct->orderClientProductInsert($row);
+            $row = array();
+        }
+        $restaurant_slug = $_SESSION['restaurant_slug'];
+        if($result > 0)
+        {
+            
+            unset($_SESSION['order']);
+            unset($_SESSION['restaurant_slug']);
+            unset($_SESSION['restaurant_id']);
 
-        $order = $requests->requestInsert($data);
-        echo $order;
-       // print_r($data);
-        unset($_SESSION['order']['restaurant_id']); 
-        print_r($_SESSION['order']);
+            header("location: ".getenv('APP_HOST')."/cardapio/".$restaurant_slug."/sucesso");
+
+        }
+        else
+        {
+            header("location: ".getenv('APP_HOST')."/cardapio/".$restaurant_slug."/erro");
+        }
     }
 }

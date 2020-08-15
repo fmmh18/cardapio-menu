@@ -8,6 +8,8 @@
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"></script>
     <script> 
         $("#change_payment").hide();
         $('#change_money').mask('000.000.000.000.000,00', {reverse: true});
@@ -38,6 +40,37 @@
         $('#change_payment').fadeOut(1500);
      }
      });
+     $('#table').DataTable({
+        "language": {
+                "sEmptyTable":   "Não foi encontrado nenhum registo",
+                "sLoadingRecords": "A carregar...",
+                "sProcessing":   "A processar...",
+                "sLengthMenu":   "Mostrar _MENU_ registos",
+                "sZeroRecords":  "Não foram encontrados resultados",
+                "sInfo":         "Mostrando de _START_ até _END_ de _TOTAL_ registos",
+                "sInfoEmpty":    "Mostrando de 0 até 0 de 0 registos",
+                "sInfoFiltered": "(filtrado de _MAX_ registos no total)",
+                "sInfoPostFix":  "",
+                "sSearch":       "Procurar:",
+                "sUrl":          "",
+                "oPaginate": {
+                    "sFirst":    "Primeiro",
+                    "sPrevious": "Anterior",
+                    "sNext":     "Seguinte",
+                    "sLast":     "Último"
+                },
+                "oAria": {
+                    "sSortAscending":  ": Ordenar colunas de forma ascendente",
+                    "sSortDescending": ": Ordenar colunas de forma descendente"
+                }
+    },
+    rowReorder: true,
+    columnDefs: [
+    { orderable: true, className: 'reorder', targets: 2 },
+    { orderable: false, targets: '_all' }
+    ]
+});
+     
     </script>
  </body>
 </html>

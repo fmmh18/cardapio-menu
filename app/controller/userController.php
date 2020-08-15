@@ -31,15 +31,8 @@ class userController
                 session_start();
                 $_SESSION['uID']   = $return['user_id'];
                 $_SESSION['uName'] = $return['user_name'];
-                $_SESSION['uLevel'] = $return['user_level'];
-                if(!empty($_SESSION['order']))
-                {
-                    header("location: ".getenv('APP_HOST')."/");
-                }
-                else
-                {
-                    header("location: ".getenv('APP_HOST')."/");
-                }
+                $_SESSION['uLevel'] = $return['user_level']; 
+                    header("location: ".getenv('APP_HOST')."/pedido"); 
             }
             else
             {
@@ -64,5 +57,36 @@ class userController
         unset($_SESSION);
         header("location: ".getenv('APP_HOST')."/");
         
+    }
+
+    public function userList()
+    {
+        session_start();
+        
+        $users   = new userModel; 
+        if($_SESSION['uLevel'] != 1)
+        {
+        header("location: ".getenv('APP_HOST')."/admin/permissao");
+        }else{
+            $datas = $users->userList(); 
+            
+            $title = "XôMenu - Seu webcardárpio";
+             require __DIR__."/../view/admin/user/list.php";
+
+        }
+    }
+    public function userAdd($request)
+    {
+        session_start();
+
+        $slug = $request['slug'];
+        
+        if($_SESSION['uLevel'] != 1)
+        {
+            header("location: ".getenv('APP_HOST')."/admin/permissao");
+        }else{
+        $title = "XôMenu - Seu webcardárpio";
+        require __DIR__."/../view/admin/user/add.php";
+        }
     }
 }

@@ -8,7 +8,6 @@
             <a href="/usuario/<?php echo $_SESSION['uID']; ?>" class="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-user"></i> <?php echo $_SESSION['uName']; ?></a>
             <?php if($_SESSION['uLevel'] == 1): ?>
               <a href="/usuario/listar" class="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-user"></i> Usuários</a>
-              <a href="/restaurante/listar" class="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-utensils"></i> Restaurante</a>
               <a href="/cardapio/listar" class="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-book"></i> Cardápio</a>   
               <a href="/categoria/listar" class="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-list"></i> Categoria</a>  
               <a href="/pedido" class="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-file-invoice-dollar"></i> Pedido</a>  

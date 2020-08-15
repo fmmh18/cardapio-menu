@@ -22,6 +22,6 @@ class requestClientProduct extends Model
         $order->quantity        = $data['quantity'];
         $order->product_price   = $data['product_price'];
         $order->created_at      = date('Y-m-d H:i:s');
-        return $order-save();
+        return $order->save();
     }
 }

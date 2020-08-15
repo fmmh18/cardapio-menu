@@ -41,4 +41,8 @@ class userModel extends Model
         
         return $user->id();
     }
+    public function userList()
+    {
+        return userModel::all();
+    }
 }

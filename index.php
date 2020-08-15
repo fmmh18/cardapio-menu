@@ -24,6 +24,7 @@ $router->group(null);
 $router->get("/","IndexController:index"); 
 $router->get("/restaurante","IndexController:restaurant"); 
 $router->get("/cardapio/{slug}","IndexController:menu"); 
+$router->get("/cardapio/{slug}/{message}","IndexController:menu"); 
 $router->get("/prato/{slug}/{tag}","IndexController:detail"); 
 $router->get("/orcamento","IndexController:budget"); 
 $router->post("/pedido","IndexController:order");  
@@ -33,22 +34,24 @@ $router->get("/login","UserController:userPageLogin");
 $router->post("/login","UserController:userLogin"); 
 $router->post("/registrar","UserController:userShore"); 
 $router->get("/sair","UserController:userLogout");
+//Usuario
+$router->get("/usuario/listar", "UserController:userList");
+$router->get("/usuario/adicionar/{slug}", "UserController:userAdd");
+$router->post("/usuario/adicionar/{slug}", "UserController:userAdd");
 
 //Rota Admin
 $router->namespace("app\controller");
 $router->group("admin");
 $router->get("/", "User:userLogin");
-$router->get("/{message}", "User:userLogin");
-$router->post("/login", "User:userAuthenticate");
-$router->get("/principal", "User:userDashboard");
+$router->get("/{message}", "User:userLogin"); 
+$router->get("/sair", "User:userLogout");
 //CRUD Usuário
-$router->get("/usuario/listar/{page}", "User:userList");
-$router->get("/usuario/adicionar", "User:userCreate");
-$router->get("/usuario/adicionar/{message}", "User:userCreate");
-$router->post("/usuario/adicionar", "User:userStore");
-$router->post("/usuario/editar", "User:userUpdate");
-$router->get("/usuario/editar/{id}", "User:userDetail");
-$router->get("/usuario/editar/{id}/{message}", "User:userDetail");
+$router->get("/usuario/adicionar", "UserController:userCreate");
+$router->get("/usuario/adicionar/{message}", "UserController:userCreate");
+$router->post("/usuario/adicionar", "UserController:userStore");
+$router->post("/usuario/editar", "UserController:userUpdate");
+$router->get("/usuario/editar/{id}", "UserController:userDetail");
+$router->get("/usuario/editar/{id}/{message}", "UserController:userDetail");
 //CRUD Pagina
 $router->get("/pagina/listar/{page}", "Page:pageList");
 $router->get("/pagina/listar/{page}/{message}", "Page:pageList");
@@ -58,31 +61,12 @@ $router->post("/pagina/adicionar", "Page:pageStore");
 $router->post("/pagina/editar", "Page:pageUpdate");
 $router->get("/pagina/editar/{id}", "Page:pageDetail");
 $router->get("/pagina/editar/{id}/{message}", "Page:pageDetail");
-$router->get("/pagina/deletar/{id}", "Page:pageDelete");
-//CRUD Curriculo
-$router->get("/curriculo/listar/{page}", "Curriculum:curriculumList");
-$router->get("/curriculo/listar/{page}/{message}", "Curriculum:curriculumList");
-$router->get("/curriculo/adicionar", "Curriculum:curriculumCreate");
-$router->get("/curriculo/adicionar/{message}", "Curriculum:curriculumCreate");
-$router->post("/curriculo/adicionar", "Curriculum:curriculumStore");
-$router->post("/curriculo/editar", "Curriculum:curriculumEdit");
-$router->get("/curriculo/editar/{id}", "Curriculum:curriculumDetail");
-$router->get("/curriculo/editar/{id}/{message}", "Curriculum:curriculumDetail");
-//CRUD Vaga
-$router->get("/vaga/listar/{page}", "Vacancy:vacancyList");
-$router->get("/vaga/listar/{page}/{message}", "Vacancy:vacancyList");
-$router->get("/vaga/adicionar", "Vacancy:vacancyCreate");
-$router->post("/vaga/adicionar", "Vacancy:vacancyStore");
-$router->post("/vaga/editar", "Vacancy:vacancyUpdate");
-$router->get("/vaga/editar/{id}", "Vacancy:vacancyDetail");
-$router->get("/vaga/editar/{id}/{message}", "Vacancy:vacancyDetail");
-
-$router->get("/sair", "User:userLogout");
+$router->get("/pagina/deletar/{id}", "Page:pageDelete"); 
 
 //Exception erro
 $router->namespace("app\controller");
 $router->group("oops");
-$router->get("/{errcode}", "Error:erro");
+$router->get("/{errcode}", "ErrorController:error");
 
 $router->dispatch(); 
 

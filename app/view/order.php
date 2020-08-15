@@ -28,11 +28,16 @@
     </p>
     </div>
     </div>
+    <div class="col-md-12"><a href="/cardapio/<?php echo $_SESSION['restaurant_slug']; ?>" class="btn btn-danger"><i class="fas fa-hand-point-left"></i> Voltar</a></div>
 <form action="/finalizar" method="post">
-<?php unset($resquests['restaurant_id']);  
-      $i = 1;
-      foreach($datas as $data):
-      if($data['product_id'] == $resquests[$i]): ?>
+<?php   
+      $total = 0;
+      $i = 0;
+      $count = count($resquests);
+      foreach($datas as $data):  
+      if($i <= $count):
+      if($resquests[$i]['product_id'] == $data['product_id']):
+?>
     <div class="col-md-12 shadow-sm p-3 mb-4 bg-white rounded">
         <div class="row">
             <div class="col-md-2"><img src="<?php echo getenv('APP_UPLOADIMAGE').$data['product_image']?>" class="img-fluid"></div>
@@ -41,12 +46,13 @@
                                <b><?php echo 'R$ '.number_format($data['product_price'],2,',','.'); ?></b>
             </div>
             <div class="col-md-2 mt-3">
-               <span class="h4"><?php echo $resquests[$i]; ?></span>
+               <span class="h4"><?php echo $resquests[$i]['product_quantity']; ?></span>
             </div>
         </div>
-        <?php $total += $resquests[$i] * $data['product_price']; ?>
+        <?php $total += $resquests[$i]['product_quantity'] * $data['product_price']; ?>
     </div>
-<?php 
+<?php  
+      endif;
       endif;
       $i++;
       endforeach; 
@@ -78,7 +84,7 @@
     <div class="row">
         <div class="col-md-12">
         <div class="custom-control custom-switch custom-switch-lg">
-            <input type="checkbox" class="custom-control-input" id="delivery" checked onclick="validaEntrega()">
+            <input type="checkbox" class="custom-control-input" name="delivery" id="delivery" checked onclick="validaEntrega()">
             <label class="custom-control-label" for="delivery"><i class="fas fa-shipping-fast"></i> Entregar</label>
         </div>
         </div>

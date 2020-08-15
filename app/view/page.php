@@ -4,7 +4,7 @@
     <div id="page-content-wrapper">
     <nav class="navbar navbar-light bg-light text-white text-center" style="background-color:#ce4926 !important">
         <button class="btn btn-outline-secondary text-white" id="menu-toggle"> <span class="navbar-toggler-icon"></span></button>
-        <div class="col-md-12 text-center"><img src="/assets/media/logo/logo-min-2.png" class="mx-auto img-fluid"></div>
+        <div class="col-md-10 text-center"><img src="/assets/media/logo/logo-min-2.png" class="mx-auto img-fluid"></div>
     
     </nav>
     <?php if(!empty($page['page_html'])): 

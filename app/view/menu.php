@@ -53,4 +53,4 @@
 </div>
 
 <?php include __DIR__."/include/footer.php"; ?>
-<?php include __DIR__."/include/modal.php"; ?>
+<?php include __DIR__."/include/message.php"; ?>

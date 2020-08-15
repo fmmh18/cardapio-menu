@@ -22,9 +22,10 @@ class requestModel extends Model
         $order->request_total           = $data['request_total'];
         $order->request_payment         = $data['request_payment'];
         $order->request_change_payment  = $data['request_change_payment'];
+        $order->request_delivery        = $data['request_delivery'];
         $order->created_at              = date('Y-m-d H:i:s');
         $order->save();
-        return $order->id();
+        return $order->id; 
     }
 }
 

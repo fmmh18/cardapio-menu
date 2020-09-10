@@ -22,6 +22,7 @@ body{
     </div>
     <div class="row mt-5" id="register" class="sr-only" style="display:none">
         <form action="/registrar" method="post" id="register-client">
+        <input type="hidden" name="user_level" value="">
         <div class="col-md-6 mt-5 offset-md-3 bg-white">
             <div class="row">
                 <div class="col-md-12 text-center"><img src="/assets/media/logo/logo-min-240.png" alt=""></div>

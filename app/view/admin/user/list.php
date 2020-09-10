@@ -10,11 +10,7 @@
       <div class="container p-5">
         <div class="row">
             <div class="col-md-12"><h3>Usuários</h3></div>
-            <div class="col-md-12 text-right"><a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-plus-circle"></i> Usuário</a>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="/usuario/adicionar/administrador">Administrador</a>
-                <a class="dropdown-item" href="/usuario/adicionar/restaurante">Restaurante</a>
-            </div>
+            <div class="col-md-12 text-right"><a href="/usuario/adicionar" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Usuário</a>
             </div>
             <div class="col-md-12 mt-5">
                 <table class="table table-bordered table-striped" id="table">

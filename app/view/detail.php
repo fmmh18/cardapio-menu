@@ -11,27 +11,27 @@
 <div class="col-md-12">
 <div class="row shadow-lg p-3 mb-5 bg-white rounded">
 <div class="col-md-2">
-<img src="<?php echo getenv('APP_UPLOADLOGO').$restaurant['restaurant_logo'] ?>" class="mx-auto img-fluid">
+<img src="/<?php echo getenv('APP_UPLOADLOGO').$restaurant['user_image'] ?>" class="mx-auto img-fluid">
 </div>
 <div class="col-md-10">
-<b class="h3"><?php echo $restaurant['restaurant_name']; ?></b>
-<p><?php echo 'Endereço: '.$restaurant['restaurant_address'].' Bairro: '.$restaurant['restaurant_neighbor'].'<br/>Cidade/Estado: '.$restaurant['restaurant_city'].'/'.$restaurant['restaurant_state'].'<br/>CEP: '.$restaurant['restaurant_zipcode']; ?></p>
+<b class="h3"><?php echo $restaurant['user_name']; ?></b>
+<p><?php echo 'Endereço: '.$restaurant['user_address'].' Bairro: '.$restaurant['user_neighborhood'].'<br/>Cidade/Estado: '.$restaurant['user_city'].'/'.$restaurant['user_state'].'<br/>CEP: '.$restaurant['user_zipcode']; ?></p>
 <p>
-<?php if(!empty($restaurant['restaurant_phone'])): ?>
-<i class="fa fa-phone"></i> <?php echo $restaurant['restaurant_phone']; ?>&nbsp;&nbsp;
+<?php if(!empty($restaurant['user_phone'])): ?>
+<i class="fa fa-phone"></i> <?php echo $restaurant['user_phone']; ?>&nbsp;&nbsp;
 <?php endif; ?>
-<?php if(!empty($restaurant['restaurant_cellphone'])): ?>
-<i class="fab fa-whatsapp"></i> <?php echo $restaurant['restaurant_cellphone']; ?>&nbsp;&nbsp;
+<?php if(!empty($restaurant['user_cellphone'])): ?>
+<i class="fab fa-whatsapp"></i> <?php echo $restaurant['user_cellphone']; ?>&nbsp;&nbsp;
 <?php endif; ?>
-<?php if(!empty($restaurant['restaurant_mail'])): ?>
-<i class="fa fa-envelope"></i> <?php echo $restaurant['restaurant_mail']; ?>
+<?php if(!empty($restaurant['user_mail'])): ?>
+<i class="fa fa-envelope"></i> <?php echo $restaurant['user_mail']; ?>
 <?php endif; ?>
 </p>
 </div>
 </div>
 <form action="/pedido" method="post"> 
-<input type="hidden" name="restaurant_id" value="<?php echo $restaurant['restaurant_id']; ?>">
-<input type="hidden" name="restaurant_slug" value="<?php echo $restaurant['restaurant_slug']; ?>">
+<input type="hidden" name="user_id" value="<?php echo $restaurant['user_id']; ?>">
+<input type="hidden" name="user_slug" value="<?php echo $restaurant['user_slug']; ?>">
 <input type="hidden" name="product_id" value="<?php echo $data['product_id']; ?>">
     <div class="col-md-12 shadow-sm p-3 mb-4 bg-white rounded">
         <div class="row">

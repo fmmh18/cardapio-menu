@@ -6,7 +6,7 @@
 
 class restaurantModel extends Model
 {
-    protected $table = "restaurant";
+    protected $table = "user";
 
     public function __construct()
     {
@@ -15,12 +15,12 @@ class restaurantModel extends Model
 
     public function restaurantList()
     {
-        return restaurantModel::where('restaurant_status',1)->get();
+        return restaurantModel::where('user_status',1)->where('user_level',2)->get();
     }
 
     public function restaurantInfo($slug)
     {
-        return restaurantModel::where('restaurant_status',1)->where('restaurant_slug',$slug)->first();
+        return restaurantModel::where('user_status',1)->where('user_slug',$slug)->first();
     }
 
 }

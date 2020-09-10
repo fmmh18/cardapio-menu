@@ -10,30 +10,31 @@
     <div class="col-md-12">
     <div class="row shadow-lg p-3 mb-5 bg-white rounded">
     <div class="col-md-2">
-    <img src="<?php echo getenv('APP_UPLOADLOGO').$restaurant['restaurant_logo'] ?>" class="mx-auto img-fluid">
+    <img src="/<?php echo getenv('APP_UPLOADLOGO').$restaurant['user_image'] ?>" class="mx-auto img-fluid">
     </div>
     <div class="col-md-10">
-    <b class="h3"><?php echo $restaurant['restaurant_name']; ?></b>
-    <p><?php echo 'Endereço: '.$restaurant['restaurant_address'].' Bairro: '.$restaurant['restaurant_neighbor'].'<br/>Cidade/Estado: '.$restaurant['restaurant_city'].'/'.$restaurant['restaurant_state'].'<br/>CEP: '.$restaurant['restaurant_zipcode']; ?></p>
+    <b class="h3"><?php echo $restaurant['user_name']; ?></b>
+    <p><?php echo 'Endereço: '.$restaurant['user_address'].' Bairro: '.$restaurant['user_neighborhood'].'<br/>Cidade/Estado: '.$restaurant['user_city'].'/'.$restaurant['user_state'].'<br/>CEP: '.$restaurant['user_zipcode']; ?></p>
     <p>
-    <?php if(!empty($restaurant['restaurant_phone'])): ?>
-    <i class="fa fa-phone"></i> <?php echo $restaurant['restaurant_phone']; ?>&nbsp;&nbsp;
+    <?php if(!empty($restaurant['user_phone'])): ?>
+    <i class="fa fa-phone"></i> <?php echo $restaurant['user_phone']; ?>&nbsp;&nbsp;
     <?php endif; ?>
-    <?php if(!empty($restaurant['restaurant_cellphone'])): ?>
-    <i class="fab fa-whatsapp"></i> <?php echo $restaurant['restaurant_cellphone']; ?>&nbsp;&nbsp;
+    <?php if(!empty($restaurant['user_cellphone'])): ?>
+    <i class="fab fa-whatsapp"></i> <?php echo $restaurant['user_cellphone']; ?>&nbsp;&nbsp;
     <?php endif; ?>
-    <?php if(!empty($restaurant['restaurant_mail'])): ?>
-    <i class="fa fa-envelope"></i> <?php echo $restaurant['restaurant_mail']; ?>
+    <?php if(!empty($restaurant['user_mail'])): ?>
+    <i class="fa fa-envelope"></i> <?php echo $restaurant['user_mail']; ?>
     <?php endif; ?>
     </p>
     </div>
     </div>
-    <div class="col-md-12"><a href="/cardapio/<?php echo $_SESSION['restaurant_slug']; ?>" class="btn btn-danger"><i class="fas fa-hand-point-left"></i> Voltar</a></div>
+    <div class="col-md-12"><a href="/cardapio/<?php echo $_SESSION['user_slug']; ?>" class="btn btn-danger"><i class="fas fa-hand-point-left"></i> Voltar</a></div>
 <form action="/finalizar" method="post">
 <?php   
       $total = 0;
       $i = 0;
       $count = count($resquests);
+      echo $count;
       foreach($datas as $data):  
       if($i <= $count):
       if($resquests[$i]['product_id'] == $data['product_id']):
@@ -93,8 +94,8 @@
 <div class="col-md-12 p-5" id="address">
     <div class="row">
         <div class="col-md-12"><b class="h4">Endereço para entregar</b></div>
-        <div class="col-md-12"><b><?php echo $client['client_name']; ?></b></div>
-        <div class="col-md-12"><?php echo $client['client_address'].' - n°'.$client['client_number'].'<br/>Bairro: '.$client['client_neighbor'].' - '.$client['client_city'].'/'.$client['client_state']; ?></div>
+        <div class="col-md-12"><b><?php echo $client['user_name']; ?></b></div>
+        <div class="col-md-12"><?php echo $client['user_address'].' - n°'.$client['user_number'].'<br/>Bairro: '.$client['user_neighborhood'].' - '.$client['user_city'].'/'.$client['user_state']; ?></div>
     </div>
 </div>
 <div class="col-md-12 p-5">

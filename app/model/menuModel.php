@@ -15,6 +15,6 @@ class menuModel extends Model
 
     public function menuList($id)
     {
-        return menuModel::where('restaurant_id','=',$id)->get();
+        return menuModel::where('user_id','=',$id)->get();
     }
 }

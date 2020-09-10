@@ -29,15 +29,22 @@ $router->get("/prato/{slug}/{tag}","IndexController:detail");
 $router->get("/orcamento","IndexController:budget"); 
 $router->post("/pedido","IndexController:order");  
 $router->get("/pedido","IndexController:order");  
+$router->get("/pedido/listar","RequestController:requestList");  
+$router->get("/pedido/listar/{page}","RequestController:requestList");  
 $router->post("/finalizar","IndexController:shore");  
 $router->get("/login","UserController:userPageLogin"); 
 $router->post("/login","UserController:userLogin"); 
 $router->post("/registrar","UserController:userShore"); 
 $router->get("/sair","UserController:userLogout");
+$router->get("/cancelar","IndexController:sessionOrder");
 //Usuario
 $router->get("/usuario/listar", "UserController:userList");
-$router->get("/usuario/adicionar/{slug}", "UserController:userAdd");
-$router->post("/usuario/adicionar/{slug}", "UserController:userAdd");
+$router->get("/usuario/adicionar", "UserController:userCreate");
+$router->get("/usuario/adicionar/{message}", "UserController:userCreate");
+$router->post("/usuario/adicionar", "UserController:userShore");
+$router->get("/usuario/editar/{id}", "UserController:userEdit");
+$router->get("/usuario/editar/{id}/{message}", "UserController:userEdit");
+$router->post("/usuario/editar", "UserController:userUpdate");
 
 //Rota Admin
 $router->namespace("app\controller");

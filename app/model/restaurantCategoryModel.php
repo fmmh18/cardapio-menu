@@ -15,7 +15,7 @@ class restaurantCategoryModel extends Model
 
     public function restaurantCategoryList($id)
     {
-        return restaurantCategoryModel::where('restaurant_id','=',$id)->get();
+        return restaurantCategoryModel::where('user_id','=',$id)->get();
     }
 }
 
